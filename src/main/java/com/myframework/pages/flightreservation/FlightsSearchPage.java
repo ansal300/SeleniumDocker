@@ -1,8 +1,10 @@
 package com.myframework.pages.flightreservation;
 
 import com.myframework.pages.AbstractPage;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -29,7 +31,16 @@ public class FlightsSearchPage extends AbstractPage {
         passengers.selectByValue(noOfPassengers);
     }
 
-    public void searchFlights(){
+    public void searchFlights() throws InterruptedException {
+        wait.until(ExpectedConditions.elementToBeClickable(searchFlightsButton));
+        /*new Actions(driver)
+                .moveToElement(searchFlightsButton)
+                .perform();*/
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView();", searchFlightsButton);
+        wait.until(ExpectedConditions.elementToBeClickable(searchFlightsButton));
+        Thread.sleep(6000);
         this.searchFlightsButton.click();
     }
 }

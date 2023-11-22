@@ -10,8 +10,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class RegistrationPage extends AbstractPage {
 
-    private WebDriver driver;
-
     @FindBy(id = "firstName")
     private WebElement firstNameInput;
 
@@ -73,6 +71,7 @@ public class RegistrationPage extends AbstractPage {
     }
 
     public void register(){
+        wait.until(ExpectedConditions.elementToBeClickable(registerButton));
         this.registerButton.click();
     }
 }
