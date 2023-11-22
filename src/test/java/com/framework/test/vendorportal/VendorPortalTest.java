@@ -17,7 +17,7 @@ public class VendorPortalTest extends AbstractTest {
     @BeforeMethod
     @Parameters("testDataPath")
     public void setParameters(String testDataPath) {
-        this.testData = JsonUtil.getTestData(testDataPath);
+        this.testData = JsonUtil.getTestData(testDataPath,VendorPortalTestData.class);
     }
 
     @Test
