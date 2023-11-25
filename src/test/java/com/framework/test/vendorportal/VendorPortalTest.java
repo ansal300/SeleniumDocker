@@ -2,6 +2,8 @@ package com.framework.test.vendorportal;
 
 import com.framework.test.AbstractTest;
 import com.framework.test.vendorportal.model.VendorPortalTestData;
+import com.framework.util.Config;
+import com.framework.util.Constants;
 import com.framework.util.JsonUtil;
 import com.myframework.pages.vendorportal.DashboardPage;
 import com.myframework.pages.vendorportal.LoginPage;
@@ -23,7 +25,7 @@ public class VendorPortalTest extends AbstractTest {
     @Test
     public void loginTest() {
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.goTo("https://d1uh9e7cu07ukd.cloudfront.net/selenium-docker/vendor-app/index.html");
+        loginPage.goTo(Config.get(Constants.VENDOR_PORTAL_URL));
         Assert.assertTrue(loginPage.isAt());
         loginPage.login(testData.username(), testData.password());
     }

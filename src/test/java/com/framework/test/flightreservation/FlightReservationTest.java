@@ -2,6 +2,8 @@ package com.framework.test.flightreservation;
 
 import com.framework.test.AbstractTest;
 import com.framework.test.flightreservation.model.FlightReservationTestData;
+import com.framework.util.Config;
+import com.framework.util.Constants;
 import com.framework.util.JsonUtil;
 import com.myframework.pages.AbstractPage;
 import com.myframework.pages.flightreservation.*;
@@ -23,7 +25,7 @@ public class FlightReservationTest extends AbstractTest {
     @Test
     public void userRegistrationTest(){
         RegistrationPage registrationPage = new RegistrationPage(driver);
-        registrationPage.goTo("https://d1uh9e7cu07ukd.cloudfront.net/selenium-docker/reservation-app/index.html");
+        registrationPage.goTo(Config.get(Constants.FLIGHT_RESERVATION_URL));
         Assert.assertTrue(registrationPage.isAt());
 
         registrationPage.enterUserDetails(testData.firstName(), testData.lastName());
