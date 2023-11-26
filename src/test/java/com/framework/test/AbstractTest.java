@@ -1,5 +1,6 @@
 package com.framework.test;
 
+import com.framework.listener.TestListener;
 import com.framework.util.Config;
 import com.framework.util.Constants;
 import org.openqa.selenium.Capabilities;
@@ -11,13 +12,16 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.ITestContext;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Listeners;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
+@Listeners({TestListener.class})
 public abstract class AbstractTest {
 
     protected WebDriver driver;
@@ -30,8 +34,9 @@ public abstract class AbstractTest {
     }
 
     @BeforeTest
-    public void setParameters() throws MalformedURLException {
+    public void setParameters(ITestContext cntx) throws MalformedURLException {
         this.driver = Boolean.parseBoolean(Config.get(Constants.GRID_ENABLED)) ? getRemoteDriver() : getLocalDriver();
+        cntx.setAttribute(Constants.DRIVER,this.driver);
         driver.manage().window().maximize();
     }
 
