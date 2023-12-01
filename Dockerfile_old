@@ -1,0 +1,20 @@
+FROM bellsoft/liberica-openjdk-alpine-musl
+# Install curl jq
+RUN apk add curl jq
+#Workspace
+WORKDIR /home/selenium
+#Adding Required Files
+ADD /target/docker-resources /home/selenium
+#Env Variables
+#Browser
+#HUB_HOST
+#TEST_SUITE
+#THREAD_COUNT
+
+ENTRYPOINT java -cp 'libs/*' \
+           -Dselenium_grid_enabled=true \
+           -Dselenium_grid_hubHost=${HUB_HOST} \
+           -Dbrowser=${Browser} \
+           org.testng.TestNG \
+           -threadcount ${THREAD_COUNT} \
+           test-suites/${TEST_SUITE}
