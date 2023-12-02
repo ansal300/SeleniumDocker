@@ -12,7 +12,7 @@ pipeline{
 
         stage('Build Image'){
             steps{
-                bat 'docker build -t=556730/seleniumdocker .'
+                bat 'docker build -t=556730/seleniumdocker:latest .'
             }
         }
 
@@ -20,7 +20,9 @@ pipeline{
 
             steps{
 
-                bat 'docker push 556730/seleniumdocker'
+                bat 'docker push 556730/seleniumdocker:latest'
+                bat "docker tag 556730/seleniumdocker:latest 556730/seleniumdocker:${env.Build_NUMBER}"
+                bat "docker push 556730/seleniumdocker:${env.Build_NUMBER}"
 
             }
         }
